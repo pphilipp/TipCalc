@@ -12,7 +12,6 @@ import android.widget.EditText; // for bill amount input
 import android.widget.SeekBar; // for changing custom tip percentage
 import android.widget.SeekBar.OnSeekBarChangeListener; // SeekBar listener
 import android.widget.TextView; // for displaying text
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -23,31 +22,19 @@ public class MainActivity extends Activity
    private static final NumberFormat percentFormat = NumberFormat.getPercentInstance();
    private double billAmount = 0.0; // bill amount entered by the user
    private double customPercent = 0.18; // initial custom tip percentage
-
-//   private TextView amountDisplayTextView;
    @Bind(R.id.amountDisplayTextView) TextView amountDisplayTextView;// shows formatted bill amount
-
-   private TextView percentCustomTextView; // shows custom tip percentage
-   private TextView tip15TextView; // shows 15% tip
-   private TextView total15TextView; // shows total with 15% tip
-   private TextView tipCustomTextView; // shows custom tip amount
-   private TextView totalCustomTextView; // shows total with custom tip
-
-
+   @Bind(R.id.percentCustomTextView) TextView percentCustomTextView; // shows custom tip percentage
+   @Bind(R.id.tip15TextView) TextView tip15TextView; // shows 15% tip
+   @Bind(R.id.total15TextView) TextView total15TextView;  // shows custom tip amount
+   @Bind(R.id.tipCustomTextView) TextView tipCustomTextView; // shows custom tip amount
+   @Bind(R.id.totalCustomTextView) TextView totalCustomTextView; // shows total with custom tip
    // called when the activity is first created
+
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState); // call superclass's version
       setContentView(R.layout.activity_main); // inflate the GUI
-      // get references to the TextViews 
-      // that MainActivity interacts with programmatically
-//      amountDisplayTextView = (TextView) findViewById();
       ButterKnife.bind(this);
-      percentCustomTextView = (TextView) findViewById(R.id.percentCustomTextView);
-      tip15TextView = (TextView) findViewById(R.id.tip15TextView);
-      total15TextView = (TextView) findViewById(R.id.total15TextView);
-      tipCustomTextView = (TextView) findViewById(R.id.tipCustomTextView);
-      totalCustomTextView = (TextView) findViewById(R.id.totalCustomTextView);
       // update GUI based on billAmount and customPercent 
       amountDisplayTextView.setText(currencyFormat.format(billAmount));
       updateStandard(); // update the 15% tip TextViews

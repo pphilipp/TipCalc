@@ -13,6 +13,9 @@ import android.widget.SeekBar; // for changing custom tip percentage
 import android.widget.SeekBar.OnSeekBarChangeListener; // SeekBar listener
 import android.widget.TextView; // for displaying text
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 // MainActivity class for the Tip Calculator app
 public class MainActivity extends Activity
 {   // currency and percent formatters
@@ -20,12 +23,16 @@ public class MainActivity extends Activity
    private static final NumberFormat percentFormat = NumberFormat.getPercentInstance();
    private double billAmount = 0.0; // bill amount entered by the user
    private double customPercent = 0.18; // initial custom tip percentage
-   private TextView amountDisplayTextView; // shows formatted bill amount
+
+//   private TextView amountDisplayTextView;
+   @Bind(R.id.amountDisplayTextView) TextView amountDisplayTextView;// shows formatted bill amount
+
    private TextView percentCustomTextView; // shows custom tip percentage
    private TextView tip15TextView; // shows 15% tip
    private TextView total15TextView; // shows total with 15% tip
    private TextView tipCustomTextView; // shows custom tip amount
    private TextView totalCustomTextView; // shows total with custom tip
+
 
    // called when the activity is first created
    @Override
@@ -34,7 +41,8 @@ public class MainActivity extends Activity
       setContentView(R.layout.activity_main); // inflate the GUI
       // get references to the TextViews 
       // that MainActivity interacts with programmatically
-      amountDisplayTextView = (TextView) findViewById(R.id.amountDisplayTextView);
+//      amountDisplayTextView = (TextView) findViewById();
+      ButterKnife.bind(this);
       percentCustomTextView = (TextView) findViewById(R.id.percentCustomTextView);
       tip15TextView = (TextView) findViewById(R.id.tip15TextView);
       total15TextView = (TextView) findViewById(R.id.total15TextView);

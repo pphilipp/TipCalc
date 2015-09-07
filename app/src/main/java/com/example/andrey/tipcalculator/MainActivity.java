@@ -5,13 +5,17 @@ package com.example.andrey.tipcalculator;
 import java.text.NumberFormat; // for currency formatting
 
 import android.app.Activity; // base class for activities
+import android.graphics.Color;
 import android.os.Bundle; // for saving state information
+import android.support.v7.widget.Toolbar;
 import android.text.Editable; // for EditText event handling
 import android.text.TextWatcher; // EditText listener
 import android.widget.EditText; // for bill amount input
 import android.widget.SeekBar; // for changing custom tip percentage
 import android.widget.SeekBar.OnSeekBarChangeListener; // SeekBar listener
 import android.widget.TextView; // for displaying text
+
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -22,6 +26,7 @@ public class MainActivity extends Activity
    private static final NumberFormat percentFormat = NumberFormat.getPercentInstance();
    private double billAmount = 0.0; // bill amount entered by the user
    private double customPercent = 0.18; // initial custom tip percentage
+   @Bind(R.id.toolBar) Toolbar appToolBar; // shows ToolBar on app
    @Bind(R.id.amountDisplayTextView) TextView amountDisplayTextView;// shows formatted bill amount
    @Bind(R.id.percentCustomTextView) TextView percentCustomTextView; // shows custom tip percentage
    @Bind(R.id.tip15TextView) TextView tip15TextView; // shows 15% tip
@@ -35,6 +40,8 @@ public class MainActivity extends Activity
       super.onCreate(savedInstanceState); // call superclass's version
       setContentView(R.layout.activity_main); // inflate the GUI
       ButterKnife.bind(this);
+      initToolBar();
+
       // update GUI based on billAmount and customPercent 
       amountDisplayTextView.setText(currencyFormat.format(billAmount));
       updateStandard(); // update the 15% tip TextViews
@@ -46,7 +53,13 @@ public class MainActivity extends Activity
       SeekBar customTipSeekBar = (SeekBar) findViewById(R.id.customTipSeekBar);
       customTipSeekBar.setOnSeekBarChangeListener(customSeekBarListener);
    } // end method onCreate
-   
+
+   private void initToolBar() {
+      appToolBar.setTitle("Tip Calculator");
+      appToolBar.setTitleTextColor(Color.WHITE);
+//      appToolBar.setBackgroundColor(Color.rgb(0,47,100));
+   }
+
    // updates 15% tip TextViews
    private void updateStandard() {
       // calculate 15% tip and total

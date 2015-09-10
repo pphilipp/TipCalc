@@ -7,7 +7,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
+import java.text.NumberFormat;
 
 /**
  * The configuration screen for the {@link CalcWidget CalcWidget} AppWidget.
@@ -18,6 +24,11 @@ public class CalcWidgetConfigureActivity extends Activity {
     EditText mAppWidgetText;
     private static final String PREFS_NAME = "com.example.andrey.tipcalculator.CalcWidget";
     private static final String PREF_PREFIX_KEY = "appwidget_";
+
+    private static final NumberFormat percentFormat = NumberFormat.getPercentInstance();
+    private double customPercent = 0.3; // initial custom tip percentage
+    SeekBar seekBar = null;
+    TextView customPercentTextView = null;
 
     public CalcWidgetConfigureActivity() {
         super();
@@ -35,6 +46,12 @@ public class CalcWidgetConfigureActivity extends Activity {
         mAppWidgetText = (EditText) findViewById(R.id.appwidget_text);
         findViewById(R.id.add_button).setOnClickListener(mOnClickListener);
 
+        //Init customise element for widget.
+        seekBar = (SeekBar) findViewById(R.id.config_activity_seekBar);
+        seekBar.setOnSeekBarChangeListener(customSeekBarListener);
+        customPercentTextView = (TextView) findViewById(R.id.config_activity_percentage);
+//        updateCustom(); //update the custom tip TextViews  <<<<BUG on the 30%>>>
+
         // Find the widget id from the intent.
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -51,6 +68,8 @@ public class CalcWidgetConfigureActivity extends Activity {
 
         mAppWidgetText.setText(loadTitlePref(CalcWidgetConfigureActivity.this, mAppWidgetId));
     }
+
+
 
     View.OnClickListener mOnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -96,5 +115,28 @@ public class CalcWidgetConfigureActivity extends Activity {
         prefs.remove(PREF_PREFIX_KEY + appWidgetId);
         prefs.commit();
     }
+
+    private void updateCustom() {
+        // show customPercent in percentCustomTextView formatted as %
+        customPercentTextView.setText(percentFormat.format(customPercent));
+    }
+
+    // called when the user changes the position of SeekBar
+    private SeekBar.OnSeekBarChangeListener customSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
+        // update customPercent, then call updateCustom
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            // sets customPercent to position of the SeekBar's thumb
+            customPercent = progress / 100.0;
+            updateCustom(); // update the custom tip TextViews
+        } // end method onProgressChanged
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {} // end method onStartTrackingTouch
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {} // end method onStopTrackingTouch
+    }; // end OnSeekBarChangeListener
+
 }
 

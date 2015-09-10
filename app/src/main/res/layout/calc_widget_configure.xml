@@ -22,21 +22,15 @@
         android:layout_height="wrap_content"
         android:inputType="text" />
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="60sp"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/white"
-            android:text="@string/widget_three_percent"
-            android:id="@+id/config_activity_percentage" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:textSize="60sp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:text="@string/widget_three_percent"
+        android:id="@+id/config_activity_percentage" />
 
     <SeekBar
         android:layout_width="match_parent"
@@ -53,10 +47,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_widget"
-        android:layout_gravity="center"
         android:padding="5dp"
         android:textColor="@android:color/white"
         android:background="@android:color/holo_blue_dark"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

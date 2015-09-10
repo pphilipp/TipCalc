@@ -1,12 +1,83 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="@dimen/widget_margin" android:background="#09C">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#09C">
 
-    <TextView android:id="@+id/appwidget_text" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" android:text="@string/appwidget_text"
-        android:textColor="#ffffff" android:textSize="24sp" android:textStyle="bold|italic"
-        android:layout_margin="8dp" android:contentDescription="@string/appwidget_text"
-        android:background="#09C" />
+    <TextView
+        android:id="@+id/appwidget_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/appwidget_text"
+        android:textColor="#ffffff"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/appwidget_text"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:text="3%"
+        android:textSize="80sp"
+        android:layout_margin="10dp"
+        android:background="@android:color/holo_purple"
+        android:id="@+id/textView"
+        android:layout_below="@+id/appwidget_text"
+        android:layout_alignLeft="@+id/appwidget_text"
+        android:layout_alignStart="@+id/appwidget_text" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_alignTop="@+id/textView"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/amount"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:id="@+id/textView2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="1123"
+            android:id="@+id/textView3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toRightOf="@+id/textView">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/tip"
+            android:layout_weight="1"
+            android:id="@+id/textView4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_weight="1"
+            android:text="$3"
+            android:id="@+id/textView5" />
+    </LinearLayout>
 
 </RelativeLayout>

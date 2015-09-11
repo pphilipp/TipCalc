@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:minWidth="180dp" android:minHeight="180dp" android:updatePeriodMillis="86400000"
+<appwidget-provider
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="240dp"
+    android:minHeight="240dp"
+    android:updatePeriodMillis="86400000"
     android:previewImage="@drawable/example_appwidget_preview"
     android:initialLayout="@layout/calc_widget"
     android:configure="com.example.andrey.tipcalculator.CalcWidgetConfigureActivity"
-    android:resizeMode="horizontal|vertical" android:widgetCategory="home_screen|keyguard"
-    android:initialKeyguardLayout="@layout/calc_widget"></appwidget-provider>
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen|keyguard"
+    android:initialKeyguardLayout="@layout/calc_widget">
+
+</appwidget-provider>

@@ -7,9 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -28,7 +26,7 @@ public class CalcWidgetConfigureActivity extends Activity {
     private static final NumberFormat percentFormat = NumberFormat.getPercentInstance();
     private double customPercent = 0.3; // initial custom tip percentage
     SeekBar seekBar = null;
-    TextView customPercentTextView = null;
+    TextView configActivityPercentage = null;
 
     public CalcWidgetConfigureActivity() {
         super();
@@ -49,7 +47,7 @@ public class CalcWidgetConfigureActivity extends Activity {
         //Init customise element for widget.
         seekBar = (SeekBar) findViewById(R.id.config_activity_seekBar);
         seekBar.setOnSeekBarChangeListener(customSeekBarListener);
-        customPercentTextView = (TextView) findViewById(R.id.config_activity_percentage);
+        configActivityPercentage = (TextView) findViewById(R.id.config_activity_percentage);
 //        updateCustom(); //update the custom tip TextViews  <<<<BUG on the 30%>>>
 
         // Find the widget id from the intent.
@@ -66,17 +64,15 @@ public class CalcWidgetConfigureActivity extends Activity {
             return;
         }
 
-        mAppWidgetText.setText(loadTitlePref(CalcWidgetConfigureActivity.this, mAppWidgetId));
+        configActivityPercentage.setText(loadTitlePref(CalcWidgetConfigureActivity.this, mAppWidgetId));
     }
-
-
 
     View.OnClickListener mOnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             final Context context = CalcWidgetConfigureActivity.this;
 
             // When the button is clicked, store the string locally
-            String widgetText = mAppWidgetText.getText().toString();
+            String widgetText = configActivityPercentage.getText().toString();
             saveTitlePref(context, mAppWidgetId, widgetText);
 
             // It is the responsibility of the configuration activity to update the app widget
@@ -90,6 +86,10 @@ public class CalcWidgetConfigureActivity extends Activity {
             finish();
         }
     };
+
+
+
+
 
     // Write the prefix to the SharedPreferences object for this widget
     static void saveTitlePref(Context context, int appWidgetId, String text) {
@@ -116,9 +116,15 @@ public class CalcWidgetConfigureActivity extends Activity {
         prefs.commit();
     }
 
+
+
+
+
+
+
     private void updateCustom() {
         // show customPercent in percentCustomTextView formatted as %
-        customPercentTextView.setText(percentFormat.format(customPercent));
+        configActivityPercentage.setText(percentFormat.format(customPercent));
     }
 
     // called when the user changes the position of SeekBar
